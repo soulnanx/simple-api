@@ -79,15 +79,14 @@ func deleteTask(w http.ResponseWriter, r *http.Request) {
 	mu.Lock()
 	defer mu.Unlock()
 
-	// Para simplicidade, vamos deletar a tarefa pelo ID presente no caminho
 	taskID := r.URL.Query().Get("id")
 	for i, task := range tasks {
 		if task.Title == taskID {
-			tasks = append(tasks[:i], tasks[i+1:]...) // Remove a tarefa
-			w.WriteHeader(http.StatusNoContent)       // Status 204 No Content
+			tasks = append(tasks[:i], tasks[i+1:]...)
+			w.WriteHeader(http.StatusNoContent)
 			return
 		}
 	}
 
-	http.NotFound(w, r) // Retorna 404 se a tarefa não for encontrada
+	http.NotFound(w, r)
 }
