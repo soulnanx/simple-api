@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"os"
 	"sync"
 )
 
@@ -21,11 +22,15 @@ var (
 
 func main() {
 
-	http.HandleFunc("/tasks", tasksHandler)
+	port := os.Getenv("PORT")
 
+	if port == "" {
+		port = "3000"
+	}
+
+	http.HandleFunc("/tasks", tasksHandler)
 	http.HandleFunc("/ping", pingHandler)
 
-	port := "3000"
 	fmt.Printf("Servidor rodando na porta %s...\n", port)
 	http.ListenAndServe(":"+port, nil)
 }
