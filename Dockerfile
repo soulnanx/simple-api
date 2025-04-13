@@ -1,7 +1,7 @@
 # Estágio de build
 FROM golang:1.21-alpine AS builder
 WORKDIR /app
-COPY ..
+COPY . .
 RUN go mod download
 RUN go build -o /app/main .
 
