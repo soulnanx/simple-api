@@ -5,7 +5,7 @@ WORKDIR /app
 
 # Copiar os arquivos de módulo primeiro (para melhor cache)
 COPY go.mod go.sum ./
-RUN go mod download
+# RUN go mod download
 
 # Copiar o restante do código
 COPY . .
