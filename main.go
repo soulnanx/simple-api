@@ -5,7 +5,10 @@ import (
 	"fmt"
 	"net/http"
 	"os"
+	_ "simple-api/docs"
 	"sync"
+
+	httpSwagger "github.com/swaggo/http-swagger"
 )
 
 type Task struct {
@@ -20,6 +23,11 @@ var (
 	mu     sync.Mutex
 )
 
+// @title API de Tasks
+// @version 1.0
+// @description Esta API gerencia tarefas
+// @host localhost:3000
+// @BasePath /
 func main() {
 
 	port := os.Getenv("PORT")
@@ -28,8 +36,12 @@ func main() {
 		port = "3000"
 	}
 
+	swaggerHandler := httpSwagger.Handler(
+		httpSwagger.URL("/swagger/doc.json"),
+	)
 	http.HandleFunc("/tasks", tasksHandler)
 	http.HandleFunc("/ping", pingHandler)
+	http.Handle("/swagger/", swaggerHandler)
 
 	fmt.Printf("Servidor rodando na porta %s...\n", port)
 	http.ListenAndServe(":"+port, nil)
@@ -56,6 +68,12 @@ func ping(w http.ResponseWriter, _ *http.Request) {
 	fmt.Fprintf(w, "pong")
 }
 
+// @Summary Busca todas as tasks
+// @Description busca todas as tasks cadastradas
+// @Tags tasks
+// @Produce json
+// @Success 200 {array} Task "Lista de tasks"
+// @Router /tasks [get]
 func getTasks(w http.ResponseWriter, _ *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(tasks)
