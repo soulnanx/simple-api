@@ -21,12 +21,20 @@ func NewTaskHandler() *TaskHandler {
 	return &TaskHandler{service: service}
 }
 
-// @Summary Busca todas as tasks
-// @Description busca todas as tasks cadastradas
-// @Tags tasks
-// @Produce json
-// @Success 200 {array} domain.Task "Lista de tasks"
-// @Router /tasks [get]
+// @title           Your API Title
+// @version         1.0
+// @description     Your API Description
+// @host           localhost:8080
+// @BasePath       /
+
+// HandleTasks godoc
+// @Summary      Get all tasks
+// @Description  get all tasks
+// @Tags         tasks
+// @Accept       json
+// @Produce      json
+// @Success      200  {array}   domain.Task
+// @Router       /tasks [get]
 func (h *TaskHandler) HandleTasks(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
 	case http.MethodGet:

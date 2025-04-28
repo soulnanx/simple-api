@@ -1,12 +1,12 @@
 module simple-api
 
-go 1.23.0
+go 1.24
 
 toolchain go1.24.2
 
 require (
 	github.com/swaggo/http-swagger v1.2.6
-	github.com/swaggo/swag v1.16.4
+	github.com/swaggo/swag v1.16.3
 )
 
 require (
@@ -18,7 +18,8 @@ require (
 	github.com/josharian/intern v1.0.0 // indirect
 	github.com/mailru/easyjson v0.9.0 // indirect
 	github.com/swaggo/files v1.0.1 // indirect
-	golang.org/x/net v0.39.0 // indirect
-	golang.org/x/tools v0.32.0 // indirect
+	golang.org/x/net v0.17.0 // indirect
+	golang.org/x/sys v0.13.0 // indirect
+	golang.org/x/tools v0.14.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
